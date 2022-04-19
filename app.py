@@ -1,15 +1,25 @@
+#Importar herramientas necesarias de flask
 from flask import Flask, render_template, abort
-import json
+
+#Importar librería os para emplear environ
 import os
+
+#Importar json para lectura de books.json
+import json
+
+#Variable app por flask
 app = Flask (__name__)
 
+#Leer fichero json
 with open("books.json") as fichero:
     datos=json.load(fichero)
 
+#Definir ruta de inicio
 @app.route('/')
 def inicio():
     return render_template("inicio.html",libros=datos)
 
+#Definir ruta de libro
 @app.route('/libro/<isbn>')
 def libro(isbn):
     for book in datos:
@@ -17,12 +27,13 @@ def libro(isbn):
             return render_template("libro.html",libro=book)
     abort(404)
 
+#Definir ruta de categoria
 @app.route('/categoria/<categoria>')
 def categoria(categoria):
-    for cat in datos:
-        if "categories" in cat.keys() and categoria in cat["categories"]:
+    for category in datos:
+        if "categories" in category.keys() and categoria in category["categories"]:
             return render_template("categoria.html",libros=datos,categoria=categoria)
     abort(404)
 
-port=os.environ["PORT"]
-app.run('0.0.0.0', int(port), debug=False)
+#Probar en el entorno virtual de desarrollo
+app.run("0.0.0.0",5000,debug=True)
