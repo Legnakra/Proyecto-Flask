@@ -16,3 +16,10 @@ def libro(isbn):
         if "isbn" in book.keys() and isbn == book["isbn"]:
             return render_template("libro.html",libro=book)
     abort(404)
+
+@app.route('/categoria/<categoria>')
+def categoria(categoria):
+    for cat in datos:
+        if "categories" in cat.keys() and categoria in cat["categories"]:
+            return render_template("categoria.html",libros=datos,categoria=categoria)
+    abort(404)
