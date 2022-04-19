@@ -23,3 +23,6 @@ def categoria(categoria):
         if "categories" in cat.keys() and categoria in cat["categories"]:
             return render_template("categoria.html",libros=datos,categoria=categoria)
     abort(404)
+
+port=os.environ["PORT"]
+app.run('0.0.0.0', int(port), debug=False)
