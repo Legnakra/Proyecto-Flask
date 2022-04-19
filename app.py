@@ -35,5 +35,5 @@ def categoria(categoria):
             return render_template("categoria.html", libros=datos, categoria=categoria)
     abort(404)
 
-#Probar en el entorno virtual de desarrollo
-app.run(debug=True)
+port=os.environ["PORT"]
+app.run('0.0.0.0',int(port), debug=False)
