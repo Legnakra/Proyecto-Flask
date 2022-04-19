@@ -28,7 +28,7 @@ def libro(isbn):
     abort(404)
 
 #Definir ruta de categoria
-@app.route('/categoria/<categoria>')
+@app.route('/categoria/<categoria>',)
 def categoria(categoria):
     for category in datos:
         if "categories" in category.keys() and categoria in category["categories"]:
