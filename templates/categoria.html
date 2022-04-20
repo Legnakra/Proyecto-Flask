@@ -1,24 +1,26 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<a href="/">⟵ Volver a la página inicial</a>
-		<title>{{categoria}}</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="{{url_for('static', filename= 'css/main.css')}}"/>
-	</head>
-	<body>
-		<!-- Lista de libros -->
-		<h1>{{categoria}}</h1>
-		<a href="/">Inicio</a>
-		<ul>
-            {% for category in libros %}
-                {% if categoria in category.categories %}
-                    {% if category.isbn %}
+{% extends "base.html" %}
+{% block title %}{{categoria}}{% endblock %}
+{% block content %}
+<div class="posts">
+    <h1 class="content-subhead">Librería</h1>
+
+	<!-- Main -->
+	<div id="main">
+
+		<!-- One -->
+			<section id="one">
+				<a href="/">⟵ Go back</a>
+				<header class="major">
+					<h1>{{categoria}}</h1>
+					<ul>
+            			{% for category in libros %}
+                			{% if categoria in category.categories %}
+                    			{% if category.isbn %}
                         <li><a href="/libro/{{category.isbn}}">{{category.title}}</a></li>
-                	{% endif %}
-				{% endif %}
-            {% endfor %}
-        </ul>	
-	</body>
-</html>
+                				{% endif %}
+							{% endif %}
+            			{% endfor %}
+			        </ul>	
+			</section>
+	</div>
+{% endblock %}
